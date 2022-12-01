@@ -7,6 +7,8 @@ using Newtonsoft.Json;
 using LitterService.Infrastructure;
 using LitterService.Application;
 using LitterService.Persistence;
+using Microsoft.OpenApi.Models;
+using System;
 
 namespace LitterService.API
 {
@@ -29,9 +31,29 @@ namespace LitterService.API
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen(options =>
+            services.AddSwaggerGen(c =>
             {
-                options.CustomSchemaIds(type => type.ToString());
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer ey..\"",
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme {
+                            Reference = new OpenApiReference {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
             });
 
             services.AddCors(options =>
@@ -49,7 +71,7 @@ namespace LitterService.API
 
             services.AddApplicationServices();
             services.AddPersistanceServices(Configuration);
-            services.AddInfrastructureServices();
+            services.AddInfrastructureServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

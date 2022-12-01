@@ -6,6 +6,7 @@ ENV ASPNETCORE_URLS=http://+:13000
 ENV ASPNETCORE_ENVIRONMENT ASPNETCORE_ENVIRONMENT
 ENV LITTERDB_CONNECTIONSTRING LITTERDB_CONNECTIONSTRING
 ENV RUN_MIGRATIONS RUN_MIGRATIONS
+ENV PUB_KEY PUB_KEY
 
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
 # For more info, please refer to https://aka.ms/vscode-docker-dotnet-configure-containers
