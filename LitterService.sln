@@ -7,19 +7,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F83A42FF-F21
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{F2444F68-1996-43B7-B161-12600FF52241}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitterBackend.API", "src\API\LitterBackend.API\LitterBackend.API.csproj", "{DCF3666E-5A95-4455-8A40-2483521F3A2F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitterService.API", "src\API\LitterService.API\LitterService.API.csproj", "{DCF3666E-5A95-4455-8A40-2483521F3A2F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{452FCBAA-659F-40F2-B132-A250DBF28090}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitterBackend.Application", "src\Core\LitterBackend.Application\LitterBackend.Application.csproj", "{28A33588-85FA-4434-A74B-68CA1ABCFC2F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitterService.Application", "src\Core\LitterService.Application\LitterService.Application.csproj", "{28A33588-85FA-4434-A74B-68CA1ABCFC2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitterBackend.Domain", "src\Core\LitterBackend.Domain\LitterBackend.Domain.csproj", "{666614BF-7222-433F-8B54-8B640F3EA6E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitterService.Domain", "src\Core\LitterService.Domain\LitterService.Domain.csproj", "{666614BF-7222-433F-8B54-8B640F3EA6E3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{46AD1DC5-B2C6-4785-825B-D5B2E8E1E72D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitterBackend.Infrastructure", "src\Infrastructure\LitterBackend.Infrastructure\LitterBackend.Infrastructure.csproj", "{FABEA63F-5701-46E1-989E-BDFDB0F0B490}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitterService.Infrastructure", "src\Infrastructure\LitterService.Infrastructure\LitterService.Infrastructure.csproj", "{FABEA63F-5701-46E1-989E-BDFDB0F0B490}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitterBackend.Persistence", "src\Infrastructure\LitterBackend.Persistence\LitterBackend.Persistence.csproj", "{CD89790C-E34E-4561-8FB1-EBF6A464BFBE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitterService.Persistence", "src\Infrastructure\LitterService.Persistence\LitterService.Persistence.csproj", "{CD89790C-E34E-4561-8FB1-EBF6A464BFBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

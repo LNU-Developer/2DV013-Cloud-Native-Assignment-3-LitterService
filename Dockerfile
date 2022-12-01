@@ -15,13 +15,13 @@ USER appuser
 FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
 
 # copy all the layers' csproj files into respective folders
-COPY ["src/Core/LitterBackend.Domain/LitterBackend.Domain.csproj", "Core/LitterBackend.Domain/"]
-COPY ["src/Core/LitterBackend.Application/LitterBackend.Application.csproj", "Core/LitterBackend.Application/"]
-COPY ["src/Infrastructure/LitterBackend.Infrastructure/LitterBackend.Infrastructure.csproj", "Infrastructure/LitterBackend.Infrastructure/"]
-COPY ["src/Infrastructure/LitterBackend.Persistence/LitterBackend.Persistence.csproj", "Infrastructure/LitterBackend.Persistence/"]
-COPY ["src/API/LitterBackend.API/LitterBackend.API.csproj", "API/LitterBackend.API/"]
+COPY ["src/Core/LitterService.Domain/LitterService.Domain.csproj", "Core/LitterService.Domain/"]
+COPY ["src/Core/LitterService.Application/LitterService.Application.csproj", "Core/LitterService.Application/"]
+COPY ["src/Infrastructure/LitterService.Infrastructure/LitterService.Infrastructure.csproj", "Infrastructure/LitterService.Infrastructure/"]
+COPY ["src/Infrastructure/LitterService.Persistence/LitterService.Persistence.csproj", "Infrastructure/LitterService.Persistence/"]
+COPY ["src/API/LitterService.API/LitterService.API.csproj", "API/LitterService.API/"]
 
-RUN dotnet restore "API/LitterBackend.API/LitterBackend.API.csproj"
+RUN dotnet restore "API/LitterService.API/LitterService.API.csproj"
 COPY . .
 RUN dotnet build -c Release -o /app/build
 
@@ -31,4 +31,4 @@ RUN dotnet publish -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "LitterBackend.API.dll"]
+ENTRYPOINT ["dotnet", "LitterService.API.dll"]

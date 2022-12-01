@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LitterBackend.Persistence
+namespace LitterService.Persistence
 {
     public static class PersistenceServiceRegistration
     {

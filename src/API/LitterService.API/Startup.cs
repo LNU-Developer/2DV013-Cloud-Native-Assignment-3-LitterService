@@ -4,11 +4,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
-using LitterBackend.Infrastructure;
-using LitterBackend.Application;
-using LitterBackend.Persistence;
+using LitterService.Infrastructure;
+using LitterService.Application;
+using LitterService.Persistence;
 
-namespace LitterBackend.API
+namespace LitterService.API
 {
     public class Startup
     {

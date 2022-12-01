@@ -1,8 +1,9 @@
+using LitterService.API;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace LitterBackend.API
+namespace LitterService.API
 {
     public class Program
     {

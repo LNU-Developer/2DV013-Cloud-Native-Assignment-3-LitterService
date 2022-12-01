@@ -1,7 +1,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LitterBackend.Infrastructure
+namespace LitterService.Infrastructure
 {
     public static class InfrastructureServiceRegistration
     {

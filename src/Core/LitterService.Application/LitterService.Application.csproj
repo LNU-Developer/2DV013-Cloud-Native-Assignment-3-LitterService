@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LitterBackend.Domain\LitterBackend.Domain.csproj" />
+    <ProjectReference Include="..\LitterService.Domain\LitterService.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

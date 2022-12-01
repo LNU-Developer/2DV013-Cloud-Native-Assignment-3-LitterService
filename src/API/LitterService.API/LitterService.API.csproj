@@ -5,9 +5,9 @@
   </PropertyGroup>
 
 <ItemGroup>
-    <ProjectReference Include="..\..\Core\LitterBackend.Application\LitterBackend.Application.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\LitterBackend.Infrastructure\LitterBackend.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\LitterBackend.Persistence\LitterBackend.Persistence.csproj" />
+    <ProjectReference Include="..\..\Core\LitterService.Application\LitterService.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\LitterService.Infrastructure\LitterService.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\LitterService.Persistence\LitterService.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>

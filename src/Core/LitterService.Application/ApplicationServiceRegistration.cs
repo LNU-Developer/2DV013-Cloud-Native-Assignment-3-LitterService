@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
 
-namespace LitterBackend.Application
+namespace LitterService.Application
 {
     public static class ApplicationServiceRegistration
     {
