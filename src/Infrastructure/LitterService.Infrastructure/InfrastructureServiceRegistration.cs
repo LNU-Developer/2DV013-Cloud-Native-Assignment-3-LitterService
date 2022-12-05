@@ -19,7 +19,7 @@ namespace LitterService.Infrastructure
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
-                var publicKey = Environment.GetEnvironmentVariable("PUB_KEY");
+                var publicKey = Environment.GetEnvironmentVariable("PUB_KEY") ?? "test";
                 var rsa = RSA.Create();
                 rsa.ImportFromPem(publicKey.ToCharArray());
 
