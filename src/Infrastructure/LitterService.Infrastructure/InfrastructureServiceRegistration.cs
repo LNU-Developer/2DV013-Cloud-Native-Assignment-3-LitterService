@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using Newtonsoft.Json;
-using LitterService.Application.Models.Identity;
 using LitterService.Application.Exceptions;
 
 namespace LitterService.Infrastructure
@@ -15,11 +14,14 @@ namespace LitterService.Infrastructure
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
+
+            var issuer = Environment.GetEnvironmentVariable("JWTISSUER") ?? "AuthService";
+            var audience = Environment.GetEnvironmentVariable("JWTAUDIENCE") ?? "LitterService";
+            var pubKey = Environment.GetEnvironmentVariable("JWTPUBLICKEY") ?? "test";
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
-                var publicKey = Environment.GetEnvironmentVariable("PUB_KEY") ?? "test";
+                var publicKey = pubKey;
                 var rsa = RSA.Create();
                 rsa.ImportFromPem(publicKey.ToCharArray());
 
@@ -29,8 +31,8 @@ namespace LitterService.Infrastructure
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     IssuerSigningKey = new RsaSecurityKey(rsa),
-                    ValidIssuer = configuration["JwtSettings:Issuer"],
-                    ValidAudience = configuration["JwtSettings:Audience"],
+                    ValidIssuer = issuer,
+                    ValidAudience = audience,
                     RequireSignedTokens = true,
                     RequireExpirationTime = true,
                     ValidateLifetime = true,
