@@ -1,0 +1,116 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: litterservice-deployment
+  labels:
+    app: litterservice
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: litterservice
+  template:
+    metadata:
+      labels:
+        app: litterservice
+    spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - litter-db
+                topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: litterservice
+          image: gitlab.lnu.se:5050/2dv013/student/team-5-burmese/2dv013-cloud-native-assignment-3-litterservice/litterservice:latest # CHANGE
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 13000
+          env:
+            - name: LITTERDB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-db-config # CHANGE!
+                  key: LITTERDB_HOST # CHANGE!
+            - name: LITTERDB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: auth-db-config # CHANGE!
+                  key: POSTGRES_DB # CHANGE!
+            - name: LITTERDB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets # CHANGE!
+                  key: POSTGRES_USER # CHANGE!
+            - name: LITTERDB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets # CHANGE!
+                  key: POSTGRES_PASSWORD # CHANGE!
+            - name: JWTISSUER
+              valueFrom:
+                configMapKeyRef:
+                  name: litterservice-configmap
+                  key: jwtissuer
+            - name: JWTAUDIENCE
+              valueFrom:
+                configMapKeyRef:
+                  name: litterservice-configmap
+                  key: jwtaudience
+            - name: JWTPUBLICKEY
+              valueFrom:
+                secretKeyRef:
+                  name: authservice-secret
+                  key: jwtprivatekey
+            - name: RUN_MIGRATIONS
+              valueFrom:
+                configMapKeyRef:
+                  name: authservice-configmap
+                  key: runmigrations
+            - name: ASPNETCORE_ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: authservice-configmap
+                  key: environment
+      imagePullSecrets:
+        - name: regcred # Secret set as a secret in the cluster
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: litterservice-service
+  labels:
+    app: litterservice
+spec:
+  selector:
+    app: litterservice
+  ports:
+    - protocol: TCP
+      port: 13000
+      targetPort: 13000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: litter-svc-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: litterservice-service
+                port:
+                  number: 13000

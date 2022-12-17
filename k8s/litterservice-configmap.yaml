@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: litterservice-configmap
+data:
+  host: "http://litterservice-service:13000"
+  environment: "Development"
+  jwtissuer: "AuthService"
+  jwtaudience: "LitterService"
+  runmigrations: "true"
