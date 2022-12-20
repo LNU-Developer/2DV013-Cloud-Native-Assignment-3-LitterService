@@ -31,7 +31,7 @@ namespace LitterService.Application.Features.Lits.Queries.GetOwnAndFollowedLits
             foreach (var lit in ownLits)
                 lits.Add(new LitDto(request.Id, lit.Message, lit.CreatedAt, lit.UpdatedAt));
 
-            return lits.OrderBy(x => x.EditedAt).ToList();
+            return lits.OrderBy(x => x.EditedAt).Distinct().ToList();
         }
     }
 }
