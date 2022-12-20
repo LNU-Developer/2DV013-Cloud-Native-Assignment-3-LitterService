@@ -23,10 +23,14 @@ namespace LitterService.Application.Features.Lits.Queries.GetOwnAndFollowedLits
             var lits = new List<LitDto>();
             foreach (var follow in followings)
             {
-                var dbLit = await _unitOfWork.Lits.FindAsync(x => x.IsDeleted == false && x.CreatedByUserId == follow.FollowedUserId);
-                foreach (var lit in dbLit)
-                    lits.Add(new LitDto(lit.Id, lit.Message, lit.CreatedAt, lit.UpdatedAt));
+                var followersLits = await _unitOfWork.Lits.FindAsync(x => x.IsDeleted == false && x.CreatedByUserId == follow.FollowedUserId);
+                foreach (var lit in followersLits)
+                    lits.Add(new LitDto(follow.FollowedUserId, lit.Message, lit.CreatedAt, lit.UpdatedAt));
             }
+            var ownLits = await _unitOfWork.Lits.FindAsync(x => x.IsDeleted == false && x.CreatedByUserId == request.Id);
+            foreach (var lit in ownLits)
+                lits.Add(new LitDto(request.Id, lit.Message, lit.CreatedAt, lit.UpdatedAt));
+
             return lits.OrderBy(x => x.EditedAt).ToList();
         }
     }

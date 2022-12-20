@@ -4,14 +4,14 @@ namespace LitterService.Application.Features.Lits.Queries.GetOwnAndFollowedLits.
 {
     public sealed record LitDto
     {
-        public LitDto(int id, string message, DateTime createdAt, DateTime editedAt)
+        public LitDto(Guid creatorId, string message, DateTime createdAt, DateTime editedAt)
         {
-            Id = id;
+            CreatorId = creatorId;
             Message = message;
             CreatedAt = createdAt;
             EditedAt = editedAt;
         }
-        public int Id { get; private set; }
+        public Guid CreatorId { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime EditedAt { get; private set; }
         public string Message { get; private set; }
