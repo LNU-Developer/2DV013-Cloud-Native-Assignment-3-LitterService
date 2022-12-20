@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using LitterService.Application.Features.Lits.Queries.Dtos;
+using LitterService.Application.Features.Lits.Queries.GetLitsByUserId.Dtos;
 using MediatR;
 
-namespace LitterService.Application.Features.Lits.Queries
+namespace LitterService.Application.Features.Lits.Queries.GetLitsByUserId
 {
     public sealed record GetLitsByUserIdQuery : IRequest<List<LitDto>>
     {

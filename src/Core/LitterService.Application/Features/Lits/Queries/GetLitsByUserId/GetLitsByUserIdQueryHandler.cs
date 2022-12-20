@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using LitterService.Application.Contracts.Persistence;
-using LitterService.Application.Features.Lits.Queries.Dtos;
+using LitterService.Application.Features.Lits.Queries.GetLitsByUserId.Dtos;
 using MediatR;
 
-namespace LitterService.Application.Features.Lits.Queries
+namespace LitterService.Application.Features.Lits.Queries.GetLitsByUserId
 {
 
     public class GetLitsByUserIdQueryHandler : IRequestHandler<GetLitsByUserIdQuery, List<LitDto>>
