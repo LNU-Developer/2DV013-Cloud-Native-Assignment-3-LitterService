@@ -37,12 +37,12 @@ spec:
             - name: LITTERDB_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: auth-db-config # CHANGE!
-                  key: LITTERDB_HOST # CHANGE!
+                  name: litter-db-config # CHANGE!
+                  key: AUTHDB_HOST # This needs to be changed to litterdb-host, but works for now since it has this name inside of the litter-db-config.
             - name: LITTERDB_DATABASE
               valueFrom:
                 configMapKeyRef:
-                  name: auth-db-config # CHANGE!
+                  name: litter-db-config # CHANGE!
                   key: POSTGRES_DB # CHANGE!
             - name: LITTERDB_USER
               valueFrom:
@@ -101,13 +101,14 @@ kind: Ingress
 metadata:
   name: litter-svc-ingress
   annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /api/$2
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   ingressClassName: nginx
   rules:
     - http:
         paths:
-          - path: /api
+          - path: /litter/api(/|$)(.*)
             pathType: Prefix
             backend:
               service:
