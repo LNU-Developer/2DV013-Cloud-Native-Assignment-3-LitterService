@@ -17,11 +17,16 @@ namespace LitterService.Application.Features.Followings.Commands.CreateFollowing
         }
         public async Task<Unit> Handle(CreateFollowingCommand request, CancellationToken cancellationToken)
         {
-            if (await _unitOfWork.Followings.ExistsAsync(x =>
+            var oldFollow = await _unitOfWork.Followings.GetWithFilterAsync(x =>
                 x.FollowingUserId == request.Follower &&
-                x.FollowedUserId == request.Followed)
-            )
+                x.FollowedUserId == request.Followed);
+            if (oldFollow is not null)
+            {
+                oldFollow.IsDeleted = false;
+                await _unitOfWork.CompleteAsync();
                 return Unit.Value;
+            }
+
             await _unitOfWork.Followings.AddAsync(new Following
             {
                 FollowingUserId = request.Follower,
