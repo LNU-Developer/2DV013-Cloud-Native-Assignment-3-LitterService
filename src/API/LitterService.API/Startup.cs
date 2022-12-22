@@ -9,6 +9,7 @@ using LitterService.Application;
 using LitterService.Persistence;
 using Microsoft.OpenApi.Models;
 using System;
+using LitterService.API.Middlewares;
 
 namespace LitterService.API
 {
@@ -86,6 +87,7 @@ namespace LitterService.API
             }
             // app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCustomExceptionHandler();
             app.UseCors("LitterCors");
             app.UseAuthorization();
             app.UseAuthentication();
