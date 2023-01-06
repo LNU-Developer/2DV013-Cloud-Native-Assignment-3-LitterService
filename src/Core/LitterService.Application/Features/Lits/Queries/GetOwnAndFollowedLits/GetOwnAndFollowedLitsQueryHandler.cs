@@ -19,7 +19,7 @@ namespace LitterService.Application.Features.Lits.Queries.GetOwnAndFollowedLits
         }
         public async Task<List<LitDto>> Handle(GetOwnAndFollowedLitsQuery request, CancellationToken cancellationToken)
         {
-            var followings = await _unitOfWork.Followings.FindAsync(x => x.FollowingUserId == request.Id);
+            var followings = await _unitOfWork.Followings.FindAsync(x => x.FollowingUserId == request.Id && x.IsDeleted == false);
             var lits = new List<LitDto>();
             foreach (var follow in followings)
             {
