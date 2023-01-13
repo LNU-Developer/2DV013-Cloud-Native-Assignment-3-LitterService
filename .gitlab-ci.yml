@@ -16,8 +16,11 @@ build:
 
 test:
   stage: test
-  script: # Run tests
-    - dotnet test
+  image: mcr.microsoft.com/dotnet/sdk:6.0
+
+  script:
+    - "dotnet restore"
+    - "dotnet test --no-restore"
 
 deploy:
   stage: deploy
